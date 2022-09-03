@@ -1,22 +1,25 @@
+/* ############# Machine-aided Translations by Era ############# */
 /*---------------------------------------------------------------------------------------
  *  SHIORI/3.0設定スクリプト for YAYA
+ *	SHIORI/3.0 configuration script for YAYA
  * --------------------------------------------------------------------------------------*/
 
 
 /*---------------------------------------------------------------------------------------
  *  初期設定値
+ *	Initialise values
  * --------------------------------------------------------------------------------------*/
 
-/* AIトーク関連 -------------------------------------------------------------------------*/
+/* AIトーク関連 -- AI talk related ----------------------------------------------------*/
 /*
-TALK_INTERVAL	AIトーク間隔の初期値[秒]
-COM_RATIO		AIトーク中に占めるコミュニケート開始の割合[%]
+TALK_INTERVAL	       AIトーク間隔の初期値[秒] -- Initial value of AI talk interval [seconds]
+COM_RATIO		       AIトーク中に占めるコミュニケート開始の割合[%] -- Percentage of communicative initiations during AI talk [%].
 */
 #globaldefine	TALK_INTERVAL	180
 #globaldefine	COM_RATIO		0
 
 
-/* インストール済みゴーストリスト構築関連 -----------------------------------------------*/
+/* インストール済みゴーストリスト構築関連 -- Installed ghost list construction related -----------*/
 /*
 IGLIST_ACCEL
 	1にするとSSP/CROW時にはNOTIFY installedghostnameで
@@ -24,35 +27,56 @@ IGLIST_ACCEL
 	sakura/kero名リストは作成されませんが高速です
 	0だとファイル走査にて構築します。
 	インストール済みゴーストが多いと時間がかかります。
-
+	
+	If set to 1, NOTIFY installedghostname will be used to build the installed ghost list during SSP / CROW.
+	The sakura / kero name list is not created, but it is fast. If it is 0, it will be built by file scanning.
+	It takes time if there are many installed ghosts.
+	
 IGLIST_MAX
 	ファイル走査にてゴーストリストを構築する際、取得する
 	数の上限を指定します。-1で制限なし（すべて取得）です。
 	0とすると取得しません。
+	
+	When constructing a ghost list by file scanning, specify the upper limit of the number to be acquired.
+	-1 is unlimited (get all).
+	If it is set to 0, it will not be acquired.
 */
 #globaldefine	SHIORI3FW.IGLIST_ACCEL		1
 #globaldefine	SHIORI3FW.IGLIST_MAX		0
 
-/* リクエスト解析・レスポンス構築関連 ---------------------------------------------------*/
+/* リクエスト解析・レスポンス構築関連 -- Request analysis / response construction related -----------*/
 /*
 SHIORI3FW.REQUEST_LINES_LIMIT
 	リクエスト文字列を解析する最大行数です。
 	減らすと起動等が高速になりますが、完全にインストール
 	済のゴーストリストを取れなくなったりします。
 	0ですべての行を取得します。
+	
+	Maximum number of lines to parse the request string.
+	If you reduce it, the startup will be faster, but you may not get the complete installed ghost list.
+	Get all rows at 0.
 
 SHIORI3FW.RES_REF_MAX
 	res_referenceの上限
+	res_reference upper limit
 
 SHIORI3FW.AUTO_DATA_CONVERT
 	1にするとAYA5と同等の処理になります。
 	-SAORIの戻り値などの自動タイプ変換・自動的に\0x01をカンマにする等の処理が入ります。
 	0にするとそれらの処理を行いません。
+	
+	If it is set to 1, the processing will be the same as AYA5.
+	Automatic type conversion of SAORI return value, etc, processes such as automatically converting \0x01 to a comma are included.
+	If it is set to 0, those processes will not be performed.
 
 SHIORI3FW.REF_ACCEL
 	1にすると、reference0 といった変数を作成せず、reference[0] という形で
 	アクセスするようになります。若干のスピードアップが見込めます。
 	0にすると、reference0 といった変数を作成します（過去互換処理）
+	
+	If set to 1, it will be accessed in the form of reference [0] without creating a variable such as reference0. 
+	A slight speedup can be expected.
+	When set to 0, a variable such as reference0 is created (past compatibility processing).
 */
 #globaldefine	SHIORI3FW.REQUEST_LINES_LIMIT	0
 #globaldefine	SHIORI3FW.RES_REF_MAX			32
